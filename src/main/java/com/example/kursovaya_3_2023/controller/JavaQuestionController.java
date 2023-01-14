@@ -15,7 +15,6 @@ public class JavaQuestionController {
     public JavaQuestionController(QuestionService javaQuetionService) {
         this.questionService = javaQuetionService;
     }
-
     @GetMapping
     public Collection<Question> getQuestions() {
         return questionService.getAll();

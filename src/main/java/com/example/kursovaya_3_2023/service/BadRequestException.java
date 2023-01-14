@@ -8,4 +8,5 @@ public class BadRequestException extends Throwable {
     public BadRequestException(String massage) {
         super(massage);
     }
+
 }

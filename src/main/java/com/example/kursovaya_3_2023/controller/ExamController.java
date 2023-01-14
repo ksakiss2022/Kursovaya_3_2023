@@ -23,4 +23,5 @@ public class ExamController {
     public Collection<Question> getQuestions(@PathVariable("amount") Integer amount) throws BadRequestException {
         return examinerService.getQuestions(amount);
     }
+
 }
