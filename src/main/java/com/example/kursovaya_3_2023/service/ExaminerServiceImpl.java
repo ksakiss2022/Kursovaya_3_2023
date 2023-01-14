@@ -17,7 +17,6 @@ public class ExaminerServiceImpl implements ExaminerService {
     public ExaminerServiceImpl(List<QuestionService> questionServices) {
         this.questionServices = questionServices;
 
-
     }
 
     @Override

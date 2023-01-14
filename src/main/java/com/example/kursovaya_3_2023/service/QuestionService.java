@@ -15,4 +15,5 @@ public interface QuestionService {
 
     Question getRandomQuestion(Collection<Question> all);
 
+    Object getRandomQuestion();
 }

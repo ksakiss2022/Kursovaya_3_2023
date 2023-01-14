@@ -41,5 +41,9 @@ public class JavaQuestionService implements QuestionService {
         return getRandomQuestion(getAll());
     }
 
+    @Override
+    public Object getRandomQuestion() {
+        return getRandomQuestion();
+    }
 
 }
