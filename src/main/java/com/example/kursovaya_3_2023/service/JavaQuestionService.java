@@ -10,6 +10,7 @@ import java.util.Set;
 public class JavaQuestionService implements QuestionService {
 
     Set<Question> questions;
+
     @Override
     public Question add(String question, String answer) throws BadRequestException {
         if (question == null || question.isBlank() || question.isEmpty()) {
