@@ -18,7 +18,6 @@ public class ExaminerServiceImpl implements ExaminerService {
         this.questionServices = questionServices;
 
     }
-
     @Override
     public Collection<Question> getQuestions(int amount) throws BadRequestException {
         if (amount <= 0 || calculateAmountOfQuestions() < amount) {

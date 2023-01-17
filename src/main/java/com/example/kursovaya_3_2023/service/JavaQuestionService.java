@@ -1,6 +1,7 @@
 package com.example.kursovaya_3_2023.service;
 
 import com.example.kursovaya_3_2023.model.Question;
+import com.example.kursovaya_3_2023.model.Random;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -10,6 +11,11 @@ import java.util.Set;
 public class JavaQuestionService implements QuestionService {
 
     Set<Question> questions;
+    private Random random;
+
+    public JavaQuestionService(QuestionService questionService) {
+
+    }
 
     @Override
     public Question add(String question, String answer) throws BadRequestException {
