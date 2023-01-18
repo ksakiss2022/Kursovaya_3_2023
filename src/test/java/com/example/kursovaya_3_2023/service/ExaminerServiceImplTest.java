@@ -44,15 +44,17 @@ class ExaminerServiceImplTest {
         Mockito.verify(questionService, Mockito.times(1)).getRandomQuestion();
         JavaQuestionService.getRandomInt(anyInt());
 
-}
+    }
 
-@Test
-    void getQuetionsIsNotCorrectAmmount(){
+    @Test
+    void getQuetionsIsNotCorrectAmmount() {
         Mockito.when(questionService.getAll()).thenReturn(Set.of(new Question("Question", "Answer")));
-       org.assertj.core.api.Assertions.<BadRequestException>assertThatExceptionOfType(BadRequestException.class).isThrownBy(()->{out.getQuestions(5);});
-        Mockito.verify(questionService,Mockito.times(1)).getAll();
+        org.assertj.core.api.Assertions.<BadRequestException>assertThatExceptionOfType(BadRequestException.class).isThrownBy(() -> {
+            out.getQuestions(5);
+        });
+        Mockito.verify(questionService, Mockito.times(1)).getAll();
         Mockito.verify(questionService, Mockito.never()).getRandomQuestion();
         JavaQuestionService.getRandomInt(anyInt());
 
-}
+    }
 }

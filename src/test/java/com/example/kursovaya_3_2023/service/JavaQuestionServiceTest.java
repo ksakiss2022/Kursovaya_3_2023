@@ -22,6 +22,7 @@ class JavaQuestionServiceTest {
     private QuestionService questionService;
     @Mock
     JavaQuestionService javaQuestionService;
+
     @BeforeEach
     void setUp() {
         out = new JavaQuestionService();
@@ -82,7 +83,7 @@ class JavaQuestionServiceTest {
         Mockito.when(questionService.getAll()).thenReturn(expectedList);
         Mockito.when(javaQuestionService.getRandomQuestion(expectedList)).thenReturn(expected);
         Question actual = (Question) out.getRandomQuestion();
-        Answer actualAnswer=(Answer) out.getRandomQuestion();
+        Answer actualAnswer = (Answer) out.getRandomQuestion();
         Assertions.assertThat(actual).isEqualTo(expected);
         Assertions.assertThat(actualAnswer).isEqualTo(expected);
         Mockito.verify(questionService, Mockito.only()).getAll();

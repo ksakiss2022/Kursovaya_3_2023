@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class ExaminerServiceImpl implements ExaminerService{
+public class ExaminerServiceImpl implements ExaminerService {
     private final List<QuestionService> questionServices;
 
     public ExaminerServiceImpl(List<QuestionService> questionServices) {
         this.questionServices = questionServices;
 
     }
+
     @Override
     public Collection<Question> getQuestions(int amount) throws BadRequestException {
         if (amount <= 0 || calculateAmountOfQuestions() < amount) {
@@ -23,7 +24,7 @@ public class ExaminerServiceImpl implements ExaminerService{
         }
         Set<Question> result = new HashSet<>();
         while (result.size() < amount) {
-            int serviceNumber=getRandomQuestion();
+            int serviceNumber = getRandomQuestion();
             var questionService = questionServices.get(serviceNumber);
             result.add((Question) questionService.getAll());
 
