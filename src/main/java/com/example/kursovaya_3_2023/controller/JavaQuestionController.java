@@ -22,13 +22,13 @@ public class JavaQuestionController {
 
 
     @GetMapping("/add")
-    public Question addQuestion(@RequestParam("quetion") String question, @RequestParam("/answer") String answer) throws BadRequestException {
+    public Question addQuestion(@RequestParam("question") String question, @RequestParam("answer") String answer) throws BadRequestException {
         return questionService.add(question, answer);
     }
 
 
     @GetMapping("/remove")
-    public Question removeQuestion(@RequestParam("quetion") String question, @RequestParam("/answer") String answer) {
+    public Question removeQuestion(@RequestParam("question") String question, @RequestParam("answer") String answer) {
         return questionService.remove(new Question(question, answer));
     }
 }

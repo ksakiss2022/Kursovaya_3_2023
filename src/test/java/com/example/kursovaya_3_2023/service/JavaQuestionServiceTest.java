@@ -1,7 +1,6 @@
 package com.example.kursovaya_3_2023.service;
 
 import com.example.kursovaya_3_2023.model.Question;
-import com.example.kursovaya_3_2023.model.Random;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.mockito.stubbing.Answer;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 class JavaQuestionServiceTest {
@@ -23,11 +21,10 @@ class JavaQuestionServiceTest {
     @Mock
     private QuestionService questionService;
     @Mock
-    private Random random;
-
+    JavaQuestionService javaQuestionService;
     @BeforeEach
     void setUp() {
-        out = new JavaQuestionService(questionService);
+        out = new JavaQuestionService();
     }
 
     @Test
@@ -71,11 +68,11 @@ class JavaQuestionServiceTest {
         Question expected = new Question("Question", "Answer");
         Collection<Question> expectedList = List.of(expected);
         Mockito.when(questionService.getAll()).thenReturn(expectedList);
-        Mockito.when(random.getRandomQuestion(expectedList)).thenReturn(expected);
+        Mockito.when(javaQuestionService.getRandomQuestion(expectedList)).thenReturn(expected);
         Question actual = (Question) out.getRandomQuestion();
         Assertions.assertThat(actual).isEqualTo(expected);
         Mockito.verify(questionService, Mockito.only()).getAll();
-        Mockito.verify(random, Mockito.only()).getRandomQuestion(expectedList);
+        Mockito.verify(javaQuestionService, Mockito.only()).getRandomQuestion(expectedList);
     }
 
     @Test
@@ -83,12 +80,12 @@ class JavaQuestionServiceTest {
         Question expected = new Question("Question", "Answer");
         Collection<Question> expectedList = List.of(expected);
         Mockito.when(questionService.getAll()).thenReturn(expectedList);
-        Mockito.when(random.getRandomQuestion(expectedList)).thenReturn(expected);
+        Mockito.when(javaQuestionService.getRandomQuestion(expectedList)).thenReturn(expected);
         Question actual = (Question) out.getRandomQuestion();
         Answer actualAnswer=(Answer) out.getRandomQuestion();
         Assertions.assertThat(actual).isEqualTo(expected);
         Assertions.assertThat(actualAnswer).isEqualTo(expected);
         Mockito.verify(questionService, Mockito.only()).getAll();
-        Mockito.verify(random, Mockito.only()).getRandomQuestion(expectedList);
+        Mockito.verify(javaQuestionService, Mockito.only()).getRandomQuestion(expectedList);
     }
 }

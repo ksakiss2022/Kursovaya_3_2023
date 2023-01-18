@@ -1,7 +1,6 @@
 package com.example.kursovaya_3_2023.service;
 
 import com.example.kursovaya_3_2023.model.Question;
-import com.example.kursovaya_3_2023.model.Random;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -10,8 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class ExaminerServiceImpl implements ExaminerService {
-    Random random;
+public class ExaminerServiceImpl implements ExaminerService{
     private final List<QuestionService> questionServices;
 
     public ExaminerServiceImpl(List<QuestionService> questionServices) {
@@ -25,12 +23,16 @@ public class ExaminerServiceImpl implements ExaminerService {
         }
         Set<Question> result = new HashSet<>();
         while (result.size() < amount) {
-            int serviceNumber = random.getRandomInt(questionServices.size());
+            int serviceNumber=getRandomQuestion();
             var questionService = questionServices.get(serviceNumber);
             result.add((Question) questionService.getAll());
 
         }
         return result;
+    }
+
+    private int getRandomQuestion() {
+        return 0;
     }
 
     private int calculateAmountOfQuestions() {
