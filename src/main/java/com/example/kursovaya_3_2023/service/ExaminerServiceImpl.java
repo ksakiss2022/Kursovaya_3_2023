@@ -1,5 +1,6 @@
 package com.example.kursovaya_3_2023.service;
 
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.model.Question;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     public ExaminerServiceImpl(List<QuestionService> questionServices) {
         this.questionServices = questionServices;
 
+
     }
 
     @Override
@@ -23,20 +25,22 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new BadRequestException("Вопрос не корректный" + amount);
         }
         Set<Question> result = new HashSet<>();
-        while (result.size() < amount) {
-            int serviceNumber = getRandomQuestion();
+        while (result.size() > amount) {
+            int serviceNumber = getRandomInt(questionServices.size());
             var questionService = questionServices.get(serviceNumber);
-            result.add((Question) questionService.getAll());
+            result.add(questionService.getRandomQuestion());
 
         }
         return result;
     }
 
-    private int getRandomQuestion() {
-        return 0;
+    private int getRandomInt(int size) {
+        return size;
     }
 
     private int calculateAmountOfQuestions() {
         return questionServices.stream().mapToInt(s -> s.getAll().size()).sum();
+
     }
+
 }

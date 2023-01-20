@@ -1,6 +1,8 @@
 package com.example.kursovaya_3_2023.service;
 
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.model.Question;
+import com.example.kursovaya_3_2023.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -8,22 +10,24 @@ import java.util.Set;
 
 @Service
 public class JavaQuestionService implements QuestionService {
+    private final QuestionRepository questionRepository;
 
     public Set<Question> questions;
 
-    public JavaQuestionService() {
+    public JavaQuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
 
     }
 
     @Override
     public Question add(String question, String answer) throws BadRequestException {
-        if (question == null || question.isBlank() || question.isEmpty()) {
+        if (question == null || question.isBlank()) {
             throw new BadRequestException("Вопрос не корректный");
         }
-        if (answer == null || answer.isBlank() || answer.isEmpty()) {
+        if (answer == null || answer.isBlank()) {
             throw new BadRequestException("Вопрос не корректный");
         }
-        return new Question(question, answer);
+        return questionRepository.add(new Question(question, answer));
     }
 
     @Override
@@ -33,20 +37,18 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question remove(Question question) {
-        return question;
+        return questionRepository.remove(question);
     }
 
     @Override
     public Collection<Question> getAll() {
 
-        return questions;
+        return questionRepository.getAll();
     }
 
-    public static int getRandomInt(int maxQuestion) {
-        return maxQuestion;
-    }
+    @Override
+    public Question getRandomQuestion() {
 
-    public Question getRandomQuestion(Collection<Question> questions) {
         int quetionNum = getRandomInt(questions.size());
         int questionCur = 0;
         for (Question question : questions) {
@@ -58,8 +60,7 @@ public class JavaQuestionService implements QuestionService {
         return null;
     }
 
-    @Override
-    public Object getRandomQuestion() {
-        return getRandomQuestion();
+    private int getRandomInt(int size) {
+        return getRandomInt(size);
     }
 }

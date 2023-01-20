@@ -1,7 +1,7 @@
 package com.example.kursovaya_3_2023.controller;
 
 import com.example.kursovaya_3_2023.model.Question;
-import com.example.kursovaya_3_2023.service.BadRequestException;
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.service.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,14 @@ public class JavaQuestionController {
     public JavaQuestionController(QuestionService javaQuetionService) {
         this.questionService = javaQuetionService;
     }
+
     @GetMapping
     public Collection<Question> getQuestions() {
         return questionService.getAll();
     }
 
 
-    @GetMapping("/add")
+    @GetMapping("/add1")
     public Question addQuestion(@RequestParam("question") String question, @RequestParam("answer") String answer) throws BadRequestException {
         return questionService.add(question, answer);
     }

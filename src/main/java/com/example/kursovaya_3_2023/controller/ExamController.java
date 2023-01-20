@@ -1,7 +1,7 @@
 package com.example.kursovaya_3_2023.controller;
 
 import com.example.kursovaya_3_2023.model.Question;
-import com.example.kursovaya_3_2023.service.BadRequestException;
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.service.ExaminerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
