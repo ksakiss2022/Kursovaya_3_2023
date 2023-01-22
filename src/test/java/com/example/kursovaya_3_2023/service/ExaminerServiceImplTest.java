@@ -28,7 +28,7 @@ class ExaminerServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        out = new ExaminerServiceImpl(List.of(questionService));
+        out = new ExaminerServiceImpl(questionService);
 
     }
 

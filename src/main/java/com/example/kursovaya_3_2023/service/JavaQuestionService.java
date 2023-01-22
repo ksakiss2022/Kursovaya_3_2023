@@ -6,17 +6,16 @@ import com.example.kursovaya_3_2023.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Random;
 import java.util.Set;
 
 @Service
 public class JavaQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
-
-    public Set<Question> questions;
+    private final Random random=new Random();
 
     public JavaQuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
-
     }
 
     @Override
@@ -49,18 +48,14 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
 
-        int quetionNum = getRandomInt(questions.size());
+        int questionNum = random.nextInt(getAll().size());
         int questionCur = 0;
-        for (Question question : questions) {
-            if (questionCur == quetionNum) {
+        for (Question question : getAll()) {
+            if (questionCur == questionNum) {
                 return question;
             }
             questionCur++;
         }
         return null;
-    }
-
-    private int getRandomInt(int size) {
-        return getRandomInt(size);
     }
 }

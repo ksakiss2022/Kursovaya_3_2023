@@ -11,36 +11,24 @@ import java.util.Set;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final List<QuestionService> questionServices;
+   private final QuestionService questionServices;
+//private final List<QuestionService> questionServices;
+ public ExaminerServiceImpl(QuestionService questionServices) {
+     this.questionServices = questionServices;  }
 
-    public ExaminerServiceImpl(List<QuestionService> questionServices) {
-        this.questionServices = questionServices;
-
-
-    }
 
     @Override
     public Collection<Question> getQuestions(int amount) throws BadRequestException {
-        if (amount <= 0 || calculateAmountOfQuestions() < amount) {
-            throw new BadRequestException("Вопрос не корректный" + amount);
+
+        if (amount <= 0 || questionServices.getAll().size() < amount) {
+            throw new BadRequestException("Нет такого количества вопросов" + amount);
         }
         Set<Question> result = new HashSet<>();
-        while (result.size() > amount) {
-            int serviceNumber = getRandomInt(questionServices.size());
-            var questionService = questionServices.get(serviceNumber);
-            result.add(questionService.getRandomQuestion());
+        while (result.size() < amount) {
+
+            result.add(questionServices.getRandomQuestion());
 
         }
         return result;
     }
-
-    private int getRandomInt(int size) {
-        return size;
-    }
-
-    private int calculateAmountOfQuestions() {
-        return questionServices.stream().mapToInt(s -> s.getAll().size()).sum();
-
-    }
-
 }
