@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-   private final QuestionService questionServices;
-//private final List<QuestionService> questionServices;
- public ExaminerServiceImpl(QuestionService questionServices) {
-     this.questionServices = questionServices;  }
+    private final QuestionService questionServices;
+
+    public ExaminerServiceImpl(QuestionService questionServices) {
+        this.questionServices = questionServices;
+    }
 
 
     @Override
