@@ -24,7 +24,7 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question1 = (Question) o;
-        return question.equals(question1.question) && answer.equals(question1.answer);
+        return Objects.equals(question, question1.getQuestion()) && Objects.equals(answer, question1.getAnswer());
     }
 
     @Override

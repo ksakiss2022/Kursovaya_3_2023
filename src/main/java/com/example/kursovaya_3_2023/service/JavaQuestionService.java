@@ -1,56 +1,61 @@
 package com.example.kursovaya_3_2023.service;
 
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.model.Question;
-import com.example.kursovaya_3_2023.model.Random;
+import com.example.kursovaya_3_2023.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.Random;
+
 
 @Service
 public class JavaQuestionService implements QuestionService {
+    private final QuestionRepository questionRepository;
+    private final Random random = new Random();
 
-    Set<Question> questions;
-    private Random random;
-
-    public JavaQuestionService(QuestionService questionService) {
-
+    public JavaQuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
 
     @Override
     public Question add(String question, String answer) throws BadRequestException {
-        if (question == null || question.isBlank() || question.isEmpty()) {
+        if (question == null || question.isBlank()) {
             throw new BadRequestException("Вопрос не корректный");
         }
-        if (answer == null || answer.isBlank() || answer.isEmpty()) {
+        if (answer == null || answer.isBlank()) {
             throw new BadRequestException("Вопрос не корректный");
         }
-        return add(new Question(question, answer));
+        return questionRepository.add(new Question(question, answer));
     }
 
     @Override
     public Question add(Question question) {
-        return add((question));
+        return question;
     }
 
     @Override
     public Question remove(Question question) {
-        return remove(question);
+        return questionRepository.remove(question);
     }
 
     @Override
     public Collection<Question> getAll() {
-        return getAll();
+
+        return questionRepository.getAll();
     }
 
     @Override
-    public Question getRandomQuestion(Collection<Question> all) {
-        return getRandomQuestion(getAll());
-    }
+    public Question getRandomQuestion() {
 
-    @Override
-    public Object getRandomQuestion() {
-        return getRandomQuestion();
+        int questionNum = random.nextInt(getAll().size());
+        int questionCur = 0;
+        for (Question question : getAll()) {
+            if (questionCur == questionNum) {
+                return question;
+            }
+            questionCur++;
+        }
+        return null;
     }
-
 }

@@ -1,10 +1,13 @@
 package com.example.kursovaya_3_2023.service;
 
+import com.example.kursovaya_3_2023.exeption.BadRequestException;
 import com.example.kursovaya_3_2023.model.Question;
 
 import java.util.Collection;
 
+
 public interface QuestionService {
+
     Question add(String question, String answer) throws BadRequestException;
 
     Question add(Question question);
@@ -13,7 +16,6 @@ public interface QuestionService {
 
     Collection<Question> getAll();
 
-    Question getRandomQuestion(Collection<Question> all);
+    Question getRandomQuestion();
 
-    Object getRandomQuestion();
 }
